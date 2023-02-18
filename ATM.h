@@ -7,6 +7,7 @@ public:
 	int customerNumber = 0;
 	int customerPIN = 0;
 	enum class accountType { CHECKING, SAVINGS };
+	ATM::accountType currentAccountType = accountType::CHECKING;
 	enum class transaction { DEPOSIT, WITHDRAW };
 
 	void setState(state type)
@@ -17,12 +18,28 @@ public:
 	{
 		customerNumber = number;
 	}
-	int getCustomerNumber()
+	void setCustomerPIN(int number)
 	{
-		return customerNumber;
+		customerPIN = number;
+	}
+	void setAccountType(accountType type)
+	{
+		currentAccountType = type;
 	}
 	ATM::state getState()
 	{
 		return currentState;
+	}
+	int getCustomerNumber()
+	{
+		return customerNumber;
+	}
+	int getCustomerPIN()
+	{
+		return customerPIN;
+	}
+	ATM::accountType getAccountType()
+	{
+		return currentAccountType;
 	}
 };
