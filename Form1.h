@@ -16,6 +16,7 @@ namespace CPPGUIProject
 
 	public:
 		Form1(void) { InitializeComponent(); }
+		ATM formATM;
 	protected:
 		~Form1()
 		{
@@ -381,32 +382,40 @@ namespace CPPGUIProject
 	{	
 		if (btnA->Text == "OK" && btnC->Text == "Exit")
 		{
-			//we're in the Start state
-			ATM formATM;
+			//we're in the Start state			
 			formATM.setCustomerNumber(Convert::ToInt64(txtNumber->Text));
-			//DEBUGGING PURPOSES: Console::WriteLine(formATM.getCustomerNumber());
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getCustomerNumber());
 			formATM.setState(ATM::state::PIN);
-			//DEBUGGING PURPOSES: Console::WriteLine(formATM.getState());
-
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 			txtNumber->Text = "";
+			txtDisplay->Text = "Enter PIN and press OK.";
 			btnB->Text = "";
 			btnC->Text = "";
 		}
 		if (btnA->Text == "OK" && btnC->Text == "")
 		{
 			//we're in the PIN state
-			// do something
-			btnA->Text = "Checkings";
-			btnB->Text = "Savings";
-			btnC->Text = "Cancel";
+			if (txtNumber->Text != "")
+			{
+				formATM.setCustomerPIN(Convert::ToInt64(txtNumber->Text));
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getCustomerPIN());
+				formATM.setState(ATM::state::ACCOUNT);
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
+				txtNumber->Text = "";
+				txtDisplay->Text = "Select Account.";
+				btnA->Text = "Checkings";
+				btnB->Text = "Savings";
+				btnC->Text = "Cancel";
+			}
 		}
 		if (btnA->Text == "Checkings" && btnB->Text == "Savings")
 		{
+			if (btnA_Click)
 			//we're in the Account state
 			// do something
-			btnA->Text = "Withdraw";
+			/*btnA->Text = "Withdraw";
 			btnB->Text = "Deposit";
-			btnC->Text = "Cancel";
+			btnC->Text = "Cancel";*/
 		}
 		if (btnA->Text == "Withdraw" && btnB->Text == "Deposit")
 		{
@@ -423,6 +432,17 @@ namespace CPPGUIProject
 		{
 			//we're in the Start State
 			Form1::Close();
+		}
+		if (btnA->Text == "Checkings" && btnB->Text == "Savings")
+		{
+			//we're in the ACCOUNT state
+			formATM.setState(ATM::state::START);
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
+			txtNumber->Text = "";
+			txtDisplay->Text = "Enter customer number and press OK.";
+			btnA->Text = "OK";
+			btnB->Text = "";
+			btnC->Text = "Exit";
 		}
 	}
 };
