@@ -384,7 +384,9 @@ namespace CPPGUIProject
 			//we're in the Start state
 			ATM formATM;
 			formATM.setCustomerNumber(Convert::ToInt64(txtNumber->Text));
-			Console::WriteLine(formATM.getCustomerNumber());
+			//DEBUGGING PURPOSES: Console::WriteLine(formATM.getCustomerNumber());
+			formATM.setState(ATM::state::PIN);
+			//DEBUGGING PURPOSES: Console::WriteLine(formATM.getState());
 
 			txtNumber->Text = "";
 			btnB->Text = "";
