@@ -6,8 +6,8 @@ public:
 	ATM::state currentState = state::START;
 	int customerNumber = 0;
 	int customerPIN = 0;
-	enum class accountType { CHECKING, SAVINGS };
-	ATM::accountType currentAccountType = accountType::CHECKING;
+	enum class accountType { CHECKINGS, SAVINGS };
+	ATM::accountType currentAccountType = accountType::CHECKINGS;
 	enum class transaction { DEPOSIT, WITHDRAW };
 
 	void setState(state type)
