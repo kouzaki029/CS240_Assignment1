@@ -412,7 +412,6 @@ namespace CPPGUIProject
 		{
 			
 			//we're in the Account state
-			// do something
 			formATM.setState(ATM::state::TRANSACT);
 			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 			formATM.setAccountType(ATM::accountType::CHECKINGS);
@@ -426,7 +425,20 @@ namespace CPPGUIProject
 		else if (btnA->Text == "Withdraw" && btnB->Text == "Deposit")
 		{
 			//we're in the Transact state
-			// do something
+			if (txtNumber->Text != "")
+			{
+				formATM.setTransactionAmount(Convert::ToInt64(txtNumber->Text));
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getTransactionAmount());
+				formATM.setTransaction(ATM::transaction::WITHDRAW);
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getTransaction());
+				formATM.setState(ATM::state::ACCOUNT);
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
+				txtNumber->Text = "";
+				txtDisplay->Text = "Select Account.";
+				btnA->Text = "Checkings";
+				btnB->Text = "Savings";
+				btnC->Text = "Cancel";
+			}
 		}
 	}
 	private: System::Void btnB_Click(System::Object^ sender, System::EventArgs^ e) 
@@ -434,16 +446,33 @@ namespace CPPGUIProject
 		if (btnA->Text == "Checkings" && btnB->Text == "Savings")
 		{
 			//we're in the Account state
-			// do something
 			formATM.setState(ATM::state::TRANSACT);
 			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState()); 
 			formATM.setAccountType(ATM::accountType::SAVINGS);
 			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getAccountType());
 			txtNumber->Text = "";
-			txtDisplay->Text = "Balance = 0.0\n\nEnter amount and select transaction";
+			txtDisplay->Text = "Balance = 0.0\r\nEnter amount and select transaction";
 			btnA->Text = "Withdraw";
 			btnB->Text = "Deposit";
 			btnC->Text = "Cancel";
+		}
+		else if (btnA->Text == "Withdraw" && btnB->Text == "Deposit")
+		{
+			//we're in the Transact state
+			if (txtNumber->Text != "")
+			{
+				formATM.setTransactionAmount(Convert::ToInt64(txtNumber->Text));
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getTransactionAmount());
+				formATM.setTransaction(ATM::transaction::DEPOSIT);
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getTransaction());
+				formATM.setState(ATM::state::ACCOUNT);
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
+				txtNumber->Text = "";
+				txtDisplay->Text = "Select Account.";
+				btnA->Text = "Checkings";
+				btnB->Text = "Savings";
+				btnC->Text = "Cancel";
+			}
 		}
 	}
 	private: System::Void btnC_Click(System::Object^ sender, System::EventArgs^ e) 
@@ -453,7 +482,7 @@ namespace CPPGUIProject
 			//we're in the Start State
 			Form1::Close();
 		}
-		if (btnA->Text == "Checkings" && btnB->Text == "Savings")
+		else if (btnA->Text == "Checkings" && btnB->Text == "Savings")
 		{
 			//we're in the ACCOUNT state
 			formATM.setState(ATM::state::START);
@@ -463,6 +492,16 @@ namespace CPPGUIProject
 			btnA->Text = "OK";
 			btnB->Text = "";
 			btnC->Text = "Exit";
+		}
+		else if (btnA->Text == "Withdraw" && btnB->Text == "Deposit")
+		{
+			formATM.setState(ATM::state::ACCOUNT);
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
+			txtNumber->Text = "";
+			txtDisplay->Text = "Select Account.";
+			btnA->Text = "Checkings";
+			btnB->Text = "Savings";
+			btnC->Text = "Cancel";
 		}
 	}
 };
