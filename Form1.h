@@ -417,6 +417,8 @@ namespace CPPGUIProject
 			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 			formATM.setAccountType(ATM::accountType::CHECKINGS);
 			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getAccountType());
+			txtNumber->Text = "";
+			txtDisplay->Text = "Balance = 0.0\r\nEnter amount and select transaction";
 			btnA->Text = "Withdraw";
 			btnB->Text = "Deposit";
 			btnC->Text = "Cancel";
@@ -431,13 +433,14 @@ namespace CPPGUIProject
 	{
 		if (btnA->Text == "Checkings" && btnB->Text == "Savings")
 		{
-
 			//we're in the Account state
 			// do something
 			formATM.setState(ATM::state::TRANSACT);
 			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState()); 
 			formATM.setAccountType(ATM::accountType::SAVINGS);
 			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getAccountType());
+			txtNumber->Text = "";
+			txtDisplay->Text = "Balance = 0.0\n\nEnter amount and select transaction";
 			btnA->Text = "Withdraw";
 			btnB->Text = "Deposit";
 			btnC->Text = "Cancel";
