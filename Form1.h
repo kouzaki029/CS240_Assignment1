@@ -392,7 +392,7 @@ namespace CPPGUIProject
 			btnB->Text = "";
 			btnC->Text = "";
 		}
-		if (btnA->Text == "OK" && btnC->Text == "")
+		else if (btnA->Text == "OK" && btnC->Text == "")
 		{
 			//we're in the PIN state
 			if (txtNumber->Text != "")
@@ -408,16 +408,20 @@ namespace CPPGUIProject
 				btnC->Text = "Cancel";
 			}
 		}
-		if (btnA->Text == "Checkings" && btnB->Text == "Savings")
+		else if (btnA->Text == "Checkings" && btnB->Text == "Savings")
 		{
-			if (btnA_Click)
+			
 			//we're in the Account state
 			// do something
-			/*btnA->Text = "Withdraw";
+			formATM.setState(ATM::state::TRANSACT);
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
+			formATM.setAccountType(ATM::accountType::CHECKINGS);
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getAccountType());
+			btnA->Text = "Withdraw";
 			btnB->Text = "Deposit";
-			btnC->Text = "Cancel";*/
+			btnC->Text = "Cancel";
 		}
-		if (btnA->Text == "Withdraw" && btnB->Text == "Deposit")
+		else if (btnA->Text == "Withdraw" && btnB->Text == "Deposit")
 		{
 			//we're in the Transact state
 			// do something
@@ -425,6 +429,19 @@ namespace CPPGUIProject
 	}
 	private: System::Void btnB_Click(System::Object^ sender, System::EventArgs^ e) 
 	{
+		if (btnA->Text == "Checkings" && btnB->Text == "Savings")
+		{
+
+			//we're in the Account state
+			// do something
+			formATM.setState(ATM::state::TRANSACT);
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState()); 
+			formATM.setAccountType(ATM::accountType::SAVINGS);
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getAccountType());
+			btnA->Text = "Withdraw";
+			btnB->Text = "Deposit";
+			btnC->Text = "Cancel";
+		}
 	}
 	private: System::Void btnC_Click(System::Object^ sender, System::EventArgs^ e) 
 	{
@@ -447,9 +464,4 @@ namespace CPPGUIProject
 	}
 };
 #pragma endregion
-
-
-
 }
-
-
