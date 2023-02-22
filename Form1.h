@@ -12,8 +12,6 @@ namespace CPPGUIProject
 
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
-		
-
 	public:
 		Form1(void) { InitializeComponent(); }
 		ATM formATM;
