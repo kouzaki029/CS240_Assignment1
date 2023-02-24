@@ -10,7 +10,7 @@ public:
 	ATM::accountType currentAccountType = accountType::CHECKINGS;
 	enum class transaction { DEPOSIT, WITHDRAW };
 	ATM::transaction currentTransaction = transaction::DEPOSIT;
-	int transactionAmount = 0;
+	double transactionAmount = 0;
 
 	void setState(state type)
 	{
@@ -32,7 +32,7 @@ public:
 	{
 		currentTransaction = type;
 	}
-	void setTransactionAmount(int number)
+	void setTransactionAmount(double number)
 	{
 		transactionAmount = number;
 	}
@@ -56,7 +56,7 @@ public:
 	{
 		return currentTransaction;
 	}
-	int getTransactionAmount()
+	double getTransactionAmount()
 	{
 		return transactionAmount;
 	}
