@@ -12,6 +12,8 @@ namespace CPPGUIProject
 
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
+		
+
 	public:
 		Form1(void) { InitializeComponent(); }
 		ATM formATM;
@@ -378,12 +380,12 @@ namespace CPPGUIProject
 	}
 #pragma endregion
 #pragma region bottom buttons
-bool TryParse(String^ value)
+bool isDigit(String^ value)
 {
 	txtNumber->Focus();
 	System::UInt64 number;
-	bool success = UInt64::TryParse(value, number);
-	if (success)
+	bool successful = UInt64::TryParse(value, number);
+	if (successful)
 	{
 		return true;
 	}
@@ -392,8 +394,25 @@ bool TryParse(String^ value)
 		if (value == nullptr)
 		{
 			value = "";
-
 		}
+		return false;
+	}
+}
+bool isFraction(String^ value)
+{
+	txtNumber->Focus();
+	System::Double number;
+	//bool successful = Double::TryParse(value, number);
+	if (Double::TryParse(value, number))
+	{
+		return true;
+	}
+	else
+	{
+		if (value == nullptr)
+		{
+			value = "";
+		}		
 		return false;
 	}
 }
@@ -401,13 +420,13 @@ private: System::Void btnA_Click(System::Object^ sender, System::EventArgs^ e)
 	{	
 		if (btnA->Text == "OK" && btnC->Text == "Exit")
 		{
-			if(TryParse(txtNumber->Text))
+			if(isDigit(txtNumber->Text))
 			{
 				//we're in the Start state			
 				formATM.setCustomerNumber(Convert::ToInt64(txtNumber->Text));
-				/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getCustomerNumber());*/
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getCustomerNumber());
 				formATM.setState(ATM::state::PIN);
-				/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getState());*/
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 				txtNumber->Text = "";
 				txtDisplay->Text = "Enter PIN and press OK.";
 				btnB->Text = "";
@@ -423,12 +442,12 @@ private: System::Void btnA_Click(System::Object^ sender, System::EventArgs^ e)
 		else if (btnA->Text == "OK" && btnC->Text == "")
 		{
 			//we're in the PIN state
-			if (TryParse(txtNumber->Text))
+			if (isDigit(txtNumber->Text))
 			{
 				formATM.setCustomerPIN(Convert::ToInt64(txtNumber->Text));
-				/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getCustomerPIN());*/
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getCustomerPIN());
 				formATM.setState(ATM::state::ACCOUNT);
-				/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getState());*/
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 				txtNumber->Text = "";
 				txtDisplay->Text = "Select Account.";
 				btnA->Text = "Checkings";
@@ -447,9 +466,9 @@ private: System::Void btnA_Click(System::Object^ sender, System::EventArgs^ e)
 			//we're in the Account state
 			btnA->Focus();
 			formATM.setState(ATM::state::TRANSACT);
-			/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getState());*/
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 			formATM.setAccountType(ATM::accountType::CHECKINGS);
-			/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getAccountType());*/
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getAccountType());
 			txtNumber->Text = "";
 			txtDisplay->Text = "Balance = 0.0\r\nEnter amount and select transaction";
 			btnA->Text = "Withdraw";
@@ -458,15 +477,15 @@ private: System::Void btnA_Click(System::Object^ sender, System::EventArgs^ e)
 		}
 		else if (btnA->Text == "Withdraw" && btnB->Text == "Deposit")
 		{
-			//we're in the Transact state
-			if (TryParse(txtNumber->Text))
+			//we're in the Transact state and this is the WITHDRAW
+			if (isFraction(txtNumber->Text))
 			{
-				formATM.setTransactionAmount(Convert::ToInt64(txtNumber->Text));
-				/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getTransactionAmount());*/
+				formATM.setTransactionAmount(Convert::ToDouble(txtNumber->Text));
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getTransactionAmount());
 				formATM.setTransaction(ATM::transaction::WITHDRAW);
-				/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getTransaction());*/
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getTransaction());
 				formATM.setState(ATM::state::ACCOUNT);
-				/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getState());*/
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 				txtNumber->Text = "";
 				txtDisplay->Text = "Select Account.";
 				btnA->Text = "Checkings";
@@ -485,11 +504,11 @@ private: System::Void btnB_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		if (btnA->Text == "Checkings" && btnB->Text == "Savings")
 		{
-			//we're in the Account state
+			//we're in the Account state and this is the SAVINGS
 			formATM.setState(ATM::state::TRANSACT);
-			/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getState());*/
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 			formATM.setAccountType(ATM::accountType::SAVINGS);
-			/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getAccountType());*/
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getAccountType());
 			txtNumber->Text = "";
 			txtDisplay->Text = "Balance = 0.0\r\nEnter amount and select transaction";
 			btnA->Text = "Withdraw";
@@ -498,20 +517,26 @@ private: System::Void btnB_Click(System::Object^ sender, System::EventArgs^ e)
 		}
 		else if (btnA->Text == "Withdraw" && btnB->Text == "Deposit")
 		{
-			//we're in the Transact state
-			if (txtNumber->Text != "")
+			//we're in the Transact state and this is the DEPOSIT
+			if (isFraction(txtNumber->Text))
 			{
-				formATM.setTransactionAmount(Convert::ToInt64(txtNumber->Text));
-				/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getTransactionAmount());*/
+				formATM.setTransactionAmount(Convert::ToDouble(txtNumber->Text));
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getTransactionAmount());
 				formATM.setTransaction(ATM::transaction::DEPOSIT);
-				/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getTransaction());*/
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getTransaction());
 				formATM.setState(ATM::state::ACCOUNT);
-				/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getState());*/
+				/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 				txtNumber->Text = "";
 				txtDisplay->Text = "Select Account.";
 				btnA->Text = "Checkings";
 				btnB->Text = "Savings";
 				btnC->Text = "Cancel";
+			}
+			else
+			{
+				MessageBox::Show("Please enter a number.");
+				txtNumber->Text = "";
+				txtNumber->Focus();
 			}
 		}
 	}
@@ -526,7 +551,7 @@ private: System::Void btnC_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			//we're in the ACCOUNT state
 			formATM.setState(ATM::state::START);
-			/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getState());*/
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 			txtNumber->Text = "";
 			txtDisplay->Text = "Enter customer number and press OK.";
 			btnA->Text = "OK";
@@ -536,7 +561,7 @@ private: System::Void btnC_Click(System::Object^ sender, System::EventArgs^ e)
 		else if (btnA->Text == "Withdraw" && btnB->Text == "Deposit")
 		{
 			formATM.setState(ATM::state::ACCOUNT);
-			/*DEBUGGING PURPOSES : Console::WriteLine(formATM.getState());*/
+			/*DEBUGGING PURPOSES :*/ Console::WriteLine(formATM.getState());
 			txtNumber->Text = "";
 			txtDisplay->Text = "Select Account.";
 			btnA->Text = "Checkings";
