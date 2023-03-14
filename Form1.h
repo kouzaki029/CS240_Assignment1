@@ -332,54 +332,67 @@ namespace CPPGUIProject
 			this->ResumeLayout(false);
 			this->PerformLayout();
 		}
+		/*if the user clicks button #1, 1 is appended to txtNumber.*/
 		System::Void btn1_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += "1";
 		}
+		/*if the user clicks button #2, 2 is appended to txtNumber.*/
 		System::Void btn2_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += "2";
 		}
+		/*if the user clicks button #3, 3 is appended to txtNumber.*/
 		System::Void btn3_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += "3";
 		}
+		/*if the user clicks button #4, 4 is appended to txtNumber.*/
 		System::Void btn4_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += "4";
 		}
+		/*if the user clicks button #5, 5 is appended to txtNumber.*/
 		System::Void btn5_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += "5";
 		}
+		/*if the user clicks button #6, 6 is appended to txtNumber.*/
 		System::Void btn6_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += "6";
 		}
+		/*if the user clicks button #7, 7 is appended to txtNumber.*/
 		System::Void btn7_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += "7";
 		}
+		/*if the user clicks button #8, 8 is appended to txtNumber.*/
 		System::Void btn8_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += "8";
 		}
+		/*if the user clicks button #9, 9 is appended to txtNumber.*/
 		System::Void btn9_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += "9";
 		}
+		/*if the user clicks button #0, 0 is appended to txtNumber.*/
 		System::Void btn0_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += "0";
 		}
+		/*if the user clicks the decimal button, a decimal is appended to txtNumber.*/
 		System::Void btnDot_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text += ".";
 		}
+		/*if the user clicks the clear button, txtNumber is an empty string.*/
 		System::Void btnCE_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			txtNumber->Text = "";
 		}
+		/*checks to see if the txtNumber->Text is a digit or not (i.e., ensures the text entered is not a character and whatnot).*/
 		bool isDigit(String^ value)
 		{
 			txtNumber->Focus();
@@ -398,6 +411,7 @@ namespace CPPGUIProject
 				return false;
 			}
 		}
+		/*checks to see if the text entered for the transactionAmount is a number (i.e., no characters, but accepts the decimal point and commas).*/
 		bool isFraction(String^ value)
 		{
 			txtNumber->Focus();
@@ -416,6 +430,7 @@ namespace CPPGUIProject
 				return false;
 			}
 		}
+		/*if btnA is clicked during certain state, the designated action is performed.*/
 		System::Void btnA_Click(System::Object^ sender, System::EventArgs^ e) 
 		{	
 			if (btnA->Text == "OK" && btnC->Text == "Exit")
@@ -500,6 +515,7 @@ namespace CPPGUIProject
 				}
 			}
 		}
+		/*if btnB is clicked during certain state, the designated action is performed.*/
 		System::Void btnB_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			if (btnA->Text == "Checkings" && btnB->Text == "Savings")
@@ -540,6 +556,7 @@ namespace CPPGUIProject
 				}
 			}
 		}
+		/*if btnC is clicked during certain state, the designated action is performed.*/
 		System::Void btnC_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
 			if (btnC->Text == "Exit")
