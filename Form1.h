@@ -78,8 +78,7 @@ namespace CPPGUIProject
 			// txtDisplay
 			// 
 			this->txtDisplay->BackColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->txtDisplay->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.125F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
+			this->txtDisplay->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.125F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->txtDisplay->Location = System::Drawing::Point(42, 377);
 			this->txtDisplay->Margin = System::Windows::Forms::Padding(4);
 			this->txtDisplay->Multiline = true;
