@@ -281,28 +281,6 @@ namespace CPPGUIProject
 			this->btnC->UseVisualStyleBackColor = false;
 			this->btnC->Click += gcnew System::EventHandler(this, &Form1::btnC_Click);
 			// 
-			// comboBox1
-			// 
-			this->comboBox1->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			this->comboBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(6) { L"State", L"Customer Number", L"Customer PIN", L"Account Type", L"Transaction Type", L"Transaction Amount"});
-			this->comboBox1->Location = System::Drawing::Point(84, 791);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(600, 39);
-			this->comboBox1->TabIndex = 12;
-			// 
-			// label1
-			// 
-			this->label1->BackColor = System::Drawing::SystemColors::Control;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.5F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(84, 844);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(600, 47);
-			this->label1->TabIndex = 13;
-			this->label1->Text = L"     ";
-			this->label1->TextAlign = System::Drawing::ContentAlignment::TopCenter;
-			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
